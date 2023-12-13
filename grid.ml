@@ -48,6 +48,14 @@ let south (i, j) = (i+1, j)
 let west  (i, j) = (i, j-1)
 let east  (i, j) = (i, j+1)
 
+let rotate_left g =
+  let h = height g and w = width g in
+  init w h (fun (i,j) -> g.(j).(w-1-i))
+
+let rotate_right g =
+  let h = height g and w = width g in
+  init w h (fun (i,j) -> g.(h-1-j).(i))
+
 let iter4 f g p =
   let f p = if inside g p then f p (get g p) in
   f (north p);

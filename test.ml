@@ -13,9 +13,16 @@
 (*                                                                        *)
 (**************************************************************************)
 
+open Format
 open Grid
 
-let g = init 5 5 (fun (i,j) -> i+j)
+let sum g = fold (fun _ x s -> x+s) g 0
 
-let s = fold (fun _ x s -> x+s) g 0
-let () = assert (s = 100)
+let g = init 5 5 (fun (i,j) -> i+j)
+let () = assert (sum g = 100)
+
+let print = print (fun fmt _ c -> pp_print_char fmt c)
+let g = init 5 10 (fun (i,j) -> Char.chr (Char.code 'A' + i+j))
+
+let () = assert (rotate_left g = rotate_right (rotate_right (rotate_right g)))
+let () = assert (rotate_right g = rotate_left (rotate_left (rotate_left g)))

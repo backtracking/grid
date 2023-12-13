@@ -87,6 +87,12 @@ val west : position -> position
 val east : position -> position
   (** the position to the right in the grid *)
 
+val rotate_left: 'a t -> 'a t
+  (** [rotate_left g] returns a new grid that is the left rotation of [g] *)
+
+val rotate_right: 'a t -> 'a t
+  (** [rotate_right g] returns a new grid that is the right rotation of [g] *)
+
 val iter4: (position -> 'a -> unit) -> 'a array array -> position -> unit
   (** [iter4 f g p] applies function [f] on the four neightbors of
       position [p] (provided they exist) *)
