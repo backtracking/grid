@@ -24,7 +24,7 @@ let width g =
   Array.length g.(0)
 
 let size g =
-  height g, width g
+  (height g, width g)
 
 let make h w v =
   if h < 1 || w < 1 then invalid_arg "Grid.make";
@@ -34,14 +34,14 @@ let init h w f =
   if h < 1 || w < 1 then invalid_arg "Grid.init";
   Array.init h (fun i -> Array.init w (fun j -> f (i, j)))
 
+let inside g (i, j) =
+  0 <= i && i < height g && 0 <= j && j < width g
+
 let get g (i, j) =
   g.(i).(j)
 
 let set g (i, j) v =
   g.(i).(j) <- v
-
-let inside g (i, j) =
-  0 <= i && i < height g && 0 <= j && j < width g
 
 let north (i, j) = (i-1, j)
 let south (i, j) = (i+1, j)
