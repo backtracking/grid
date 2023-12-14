@@ -1,3 +1,3 @@
 (lang dune 2.0)
-(name flex-array)
+(name grid)
 (formatting (enabled_for dune))
