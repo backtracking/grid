@@ -43,10 +43,26 @@ let get g (i, j) =
 let set g (i, j) v =
   g.(i).(j) <- v
 
-let north (i, j) = (i-1, j)
-let south (i, j) = (i+1, j)
-let west  (i, j) = (i, j-1)
-let east  (i, j) = (i, j+1)
+type direction = N | NW | W | SW | S | SE | E | NE
+
+let move d (i,j) = match d with
+  | N  -> (i-1, j)
+  | NW -> (i-1, j-1)
+  | W  -> (i, j-1)
+  | SW -> (i+1, j-1)
+  | S  -> (i+1, j)
+  | SE -> (i+1, j+1)
+  | E  -> (i, j+1)
+  | NE -> (i-1, j+1)
+
+let north = move N
+let north_west = move NW
+let west = move W
+let south_west = move SW
+let south = move S
+let south_east = move SE
+let east = move E
+let north_east = move NE
 
 let rotate_left g =
   let h = height g and w = width g in
@@ -55,6 +71,9 @@ let rotate_left g =
 let rotate_right g =
   let h = height g and w = width g in
   init w h (fun (i,j) -> g.(h-1-j).(i))
+
+let map f g =
+  init (height g) (width g) (fun p -> f p (get g p))
 
 let iter4 f g p =
   let f p = if inside g p then f p (get g p) in

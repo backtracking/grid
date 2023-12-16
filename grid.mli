@@ -64,28 +64,44 @@ val init: int -> int -> (position -> 'a) -> 'a t
       where the value at position [p] is [f p].
       Raises [Invalid_argument] if [h<1] or [w<1]. *)
 
-val get: 'a array array -> position -> 'a
+val get: 'a t -> position -> 'a
   (** [get g p] returns the value at position [p].
       Raises [Invalid_argument] if the position is out of bounds. *)
 
-val set: 'a array array -> position -> 'a -> unit
+val set: 'a t -> position -> 'a -> unit
   (** [set g p v] sets the value at position [p], with [v].
       Raises [Invalid_argument] if the position is out of bounds. *)
 
-val inside: 'a array array -> position -> bool
+val inside: 'a t -> position -> bool
   (** [inside g p] indicates whether position [p] is a legal position in [g] *)
 
 val north: position -> position
   (** the position above in the grid *)
 
-val south: position -> position
-  (** the position below in the grid *)
+val north_west: position -> position
+  (** the position above left in the grid *)
 
 val west : position -> position
   (** the position to the left in the grid *)
 
+val south_west: position -> position
+  (** the position below left in the grid *)
+
+val south: position -> position
+  (** the position below in the grid *)
+
+val south_east: position -> position
+  (** the position below right in the grid *)
+
 val east : position -> position
   (** the position to the right in the grid *)
+
+val north_east: position -> position
+  (** the position above right in the grid *)
+
+type direction = N | NW | W | SW | S | SE | E | NE
+
+val move: direction -> position -> position
 
 val rotate_left: 'a t -> 'a t
   (** [rotate_left g] returns a new grid that is the left rotation of [g] *)
@@ -93,18 +109,20 @@ val rotate_left: 'a t -> 'a t
 val rotate_right: 'a t -> 'a t
   (** [rotate_right g] returns a new grid that is the right rotation of [g] *)
 
-val iter4: (position -> 'a -> unit) -> 'a array array -> position -> unit
+val map: (position -> 'a -> 'b) -> 'a t -> 'b t
+
+val iter4: (position -> 'a -> unit) -> 'a t -> position -> unit
   (** [iter4 f g p] applies function [f] on the four neightbors of
       position [p] (provided they exist) *)
 
-val iter8: (position -> 'a -> unit) -> 'a array array -> position -> unit
+val iter8: (position -> 'a -> unit) -> 'a t -> position -> unit
   (** [iter4 f g p] applies function [f] on the eight neightbors of
       position [p] (provided they exist) *)
 
-val iter: (position -> 'a -> unit) -> 'a array array -> unit
+val iter: (position -> 'a -> unit) -> 'a t -> unit
   (** [iter f g] applies function [f] at each position of the grid [g] *)
 
-val fold: (position -> 'a -> 'acc -> 'acc) -> 'a array array -> 'acc -> 'acc
+val fold: (position -> 'a -> 'acc -> 'acc) -> 'a t -> 'acc -> 'acc
   (** [fold f g] folds function [f] over each position of the grid [g] *)
 
 val print:
