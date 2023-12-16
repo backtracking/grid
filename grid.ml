@@ -131,3 +131,6 @@ let print
     done;
     eol fmt i
   done
+
+let print_chars =
+  print (fun fmt _ c -> Format.pp_print_char fmt c)

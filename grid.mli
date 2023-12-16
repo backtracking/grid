@@ -145,6 +145,9 @@ val print:
       The default function does nothing.
  *)
 
+val print_chars: Format.formatter -> char t -> unit
+  (** prints a grid of characters using [Format.pp_print_char] *)
+
 val read: in_channel -> char t
   (** [read c] reads a grid of characters from the input channel [c].
       Raises [Invalid_argument] if the lines do not have the same length,
