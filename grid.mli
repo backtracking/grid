@@ -19,6 +19,7 @@
     Thus in the following, [height] refers to the first dimension
     and [width] to the second dimension.
 
+{v
              0   1       j      width-1
            +---+---+---+---+---+--+
         0  |   |   |   |   |   |  |
@@ -29,6 +30,7 @@
            +---+---+---+---+---+--+
   height-1 |   |   |   |   |   |  |
            +---+---+---+---+---+--+
+v}
 
     Following OCaml conventions, indices are 0-based.
 
@@ -116,7 +118,7 @@ val iter4: (position -> 'a -> unit) -> 'a t -> position -> unit
       position [p] (provided they exist) *)
 
 val iter8: (position -> 'a -> unit) -> 'a t -> position -> unit
-  (** [iter4 f g p] applies function [f] on the eight neightbors of
+  (** [iter8 f g p] applies function [f] on the eight neightbors of
       position [p] (provided they exist) *)
 
 val iter: (position -> 'a -> unit) -> 'a t -> unit
