@@ -121,11 +121,23 @@ val iter8: (position -> 'a -> unit) -> 'a t -> position -> unit
   (** [iter8 f g p] applies function [f] on the eight neightbors of
       position [p] (provided they exist) *)
 
+val fold4: (position -> 'a -> 'acc -> 'acc) -> 'a t -> position -> 'acc -> 'acc
+  (** [fold4 f g p] folds function [f] on the four neightbors of
+      position [p] (provided they exist) *)
+
+val fold8: (position -> 'a -> 'acc -> 'acc) -> 'a t -> position -> 'acc -> 'acc
+  (** [fold8 f g p] folds function [f] on the eight neightbors of
+      position [p] (provided they exist) *)
+
 val iter: (position -> 'a -> unit) -> 'a t -> unit
   (** [iter f g] applies function [f] at each position of the grid [g] *)
 
 val fold: (position -> 'a -> 'acc -> 'acc) -> 'a t -> 'acc -> 'acc
   (** [fold f g] folds function [f] over each position of the grid [g] *)
+
+val find: (position -> 'a -> bool) -> 'a t -> position
+  (** [find f g] returns a position in [g] where [f] holds,
+      or raises [Not_found] if there is none *)
 
 val print:
   ?bol:(Format.formatter -> int -> unit) ->

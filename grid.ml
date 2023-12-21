@@ -89,6 +89,17 @@ let iter8 f g (i, j) =
       if inside g p then f p (get g p)
   done done
 
+let fold4 f g p acc =
+  let f p acc = if inside g p then f p (get g p) acc else acc in
+  acc |> f (north p) |> f (west p) |> f (south p) |> f (east p)
+
+let fold8 f g p acc =
+  let f p acc = if inside g p then f p (get g p) acc else acc in
+  acc |> f (north p) |> f (north_west p)
+      |> f (west  p) |> f (south_west p)
+      |> f (south p) |> f (south_east p)
+      |> f (east  p) |> f (north_east p)
+
 let iter f g =
   for i = 0 to height g - 1 do
     for j = 0 to width g - 1 do
@@ -102,6 +113,11 @@ let fold f g acc =
     if j = width g then fold (i+1,0) acc else
     fold (i,j+1) (f p g.(i).(j) acc) in
   fold (0,0) acc
+
+let find f g =
+  let exception Found of position in
+  try iter (fun p c -> if f p c then raise (Found p)) g; raise Not_found
+  with Found p -> p
 
 let read c =
   let rec scan rows = match input_line c with
