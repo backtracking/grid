@@ -34,6 +34,9 @@ let init h w f =
   if h < 1 || w < 1 then invalid_arg "Grid.init";
   Array.init h (fun i -> Array.init w (fun j -> f (i, j)))
 
+let copy g =
+  init (height g) (width g) (fun (i, j) -> g.(i).(j))
+
 let inside g (i, j) =
   0 <= i && i < height g && 0 <= j && j < width g
 
