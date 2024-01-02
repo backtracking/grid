@@ -85,12 +85,12 @@ let iter4 f g p =
   f (south p);
   f (east  p)
 
-let iter8 f g (i, j) =
-  for di = -1 to 1 do for dj = -1 to 1 do
-    if di <> 0 || dj <> 0 then
-      let p = (i+di, j+dj) in
-      if inside g p then f p (get g p)
-  done done
+let iter8 f g p =
+  let f p = if inside g p then f p (get g p) in
+  f (north p); f (north_west p);
+  f (west  p); f (south_west p);
+  f (south p); f (south_east p);
+  f (east  p); f (north_east p)
 
 let fold4 f g p acc =
   let f p acc = if inside g p then f p (get g p) acc else acc in
