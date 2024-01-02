@@ -21,6 +21,14 @@ let sum g = fold (fun _ x s -> x+s) g 0
 let g = init 5 5 (fun (i,j) -> i+j)
 let () = assert (sum g = 100)
 
+let g = make 5 5 1
+let copied_grid = copy g
+let () = set copied_grid (0,0) 0
+let () = assert (get copied_grid (0,0) = 0 && get g (0,0) = 1)
+
+
+
+
 let print = print (fun fmt _ c -> pp_print_char fmt c)
 let g = init 5 10 (fun (i,j) -> Char.chr (Char.code 'A' + i+j))
 

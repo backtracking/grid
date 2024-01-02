@@ -66,6 +66,9 @@ val init: int -> int -> (position -> 'a) -> 'a t
       where the value at position [p] is [f p].
       Raises [Invalid_argument] if [h<1] or [w<1]. *)
 
+val copy: 'a t -> 'a t
+  (** [copy g] returns a new grid that contains the same elements as [g] *)
+
 val get: 'a t -> position -> 'a
   (** [get g p] returns the value at position [p].
       Raises [Invalid_argument] if the position is out of bounds. *)
@@ -113,21 +116,28 @@ val rotate_right: 'a t -> 'a t
 
 val map: (position -> 'a -> 'b) -> 'a t -> 'b t
 
+
+(** {e The following functions that iterate or fold over the neighbors of [p]
+    all begin by calling [f] on the cell north of [p] and rotate clockwise.} *)
+
 val iter4: (position -> 'a -> unit) -> 'a t -> position -> unit
-  (** [iter4 f g p] applies function [f] on the four neightbors of
+  (** [iter4 f g p] applies function [f] on the four neighbors of
       position [p] (provided they exist) *)
 
 val iter8: (position -> 'a -> unit) -> 'a t -> position -> unit
-  (** [iter8 f g p] applies function [f] on the eight neightbors of
+  (** [iter8 f g p] applies function [f] on the eight neighbors of
       position [p] (provided they exist) *)
 
 val fold4: (position -> 'a -> 'acc -> 'acc) -> 'a t -> position -> 'acc -> 'acc
-  (** [fold4 f g p] folds function [f] on the four neightbors of
+  (** [fold4 f g p] folds function [f] on the four neighbors of
       position [p] (provided they exist) *)
 
 val fold8: (position -> 'a -> 'acc -> 'acc) -> 'a t -> position -> 'acc -> 'acc
-  (** [fold8 f g p] folds function [f] on the eight neightbors of
+  (** [fold8 f g p] folds function [f] on the eight neighbors of
       position [p] (provided they exist) *)
+
+  (** {e [iter] and [fold] both begin at the top left of the grid and move
+      left to right in each row from top to bottom.} *)
 
 val iter: (position -> 'a -> unit) -> 'a t -> unit
   (** [iter f g] applies function [f] at each position of the grid [g] *)
