@@ -115,6 +115,8 @@ val rotate_right: 'a t -> 'a t
   (** [rotate_right g] returns a new grid that is the right rotation of [g] *)
 
 val map: (position -> 'a -> 'b) -> 'a t -> 'b t
+  (** [map f g] returns a fresh grid, with the size of the grid [g]
+      and where the value at position [p] is given by [f p (get g p)] *)
 
 
 (** {e The following functions that iterate or fold over the neighbors of [p]
