@@ -1,4 +1,5 @@
 
+# 0.2.0
   - add [fold4] and [fold8]
   - add [copy]
   - add [find]
