@@ -105,8 +105,10 @@ val north_east: position -> position
   (** the position above right in the grid *)
 
 type direction = N | NW | W | SW | S | SE | E | NE
+  (** the eight ways to move on the grid *)
 
 val move: direction -> position -> position
+  (** move a position in a given direction *)
 
 val rotate_left: 'a t -> 'a t
   (** [rotate_left g] returns a new grid that is the left rotation of [g] *)
